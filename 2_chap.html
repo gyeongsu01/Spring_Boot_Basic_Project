@@ -1,0 +1,104 @@
+<!-- notes/step2-overview.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>2단계 실행 점검 노트</title>
+  <style>
+    body { font-family: Arial, sans-serif; line-height: 1.6; margin: 2rem; color: #222; }
+    header { text-align: center; margin-bottom: 2rem; }
+    h1 { font-size: 1.8rem; }
+    h2 { margin-top: 2rem; border-bottom: 1px solid #ccc; padding-bottom: 0.3rem; }
+    section { margin-bottom: 1.5rem; }
+    code { background-color: #f5f5f5; padding: 0.2rem 0.4rem; border-radius: 4px; }
+    pre { background-color: #f5f5f5; padding: 1rem; border-radius: 6px; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
+    th, td { border: 1px solid #ddd; padding: 0.7rem; text-align: left; }
+    th { background-color: #fafafa; }
+    footer { margin-top: 3rem; font-size: 0.9rem; color: #666; text-align: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>2단계: 프로젝트 실행 점검</h1>
+    <p>Spring Boot 애플리케이션이 정상 기동되는지 확인한 내용을 정리한 노트입니다.</p>
+  </header>
+
+  <section>
+    <h2>1. 환경 개요</h2>
+    <ul>
+      <li>패키지 루트: <code>com.practice.basic</code></li>
+      <li>주요 의존성:
+        <ul>
+          <li><code>spring-boot-starter-web</code> – REST/MVC</li>
+          <li><code>spring-boot-starter-data-jpa</code> – JPA 연동</li>
+          <li><code>com.h2database:h2</code> – 인메모리 DB</li>
+          <li><code>org.projectlombok:lombok</code> – 보일러플레이트 제거</li>
+        </ul>
+      </li>
+      <li>설정 파일: <code>src/main/resources/application.yml</code></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>2. 실행 절차</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>순서</th>
+          <th>명령</th>
+          <th>기대 로그 / 설명</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td><code>./mvnw clean</code> (선택)</td>
+          <td>Maven 래퍼 준비, 필요 시 이전 빌드 정리.</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td><code>./mvnw spring-boot:run</code></td>
+          <td><code>Tomcat started on port(s): 8080</code> 로그가 보이면 서버 기동 성공.</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td><code>curl http://localhost:8080</code></td>
+          <td>Whitelabel Error Page는 루트 매핑 미구현 의미이므로 실행 성공.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>3. 확인 사항</h2>
+    <ul>
+      <li>로그에서 <strong>“Tomcat started on port(s): 8080”</strong> 확인.</li>
+      <li>브라우저/터미널에서 <code>http://localhost:8080</code> 접속 시 Whitelabel 페이지 출력.</li>
+      <li>추후 컨트롤러 구현으로 Whitelabel을 정상 응답으로 대체 예정.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>4. 트러블슈팅 힌트</h2>
+    <ul>
+      <li>포트 충돌 시: <code>application.yml</code>의 <code>server.port</code> 값을 변경.</li>
+      <li>YAML 파싱 에러: 들여쓰기(스페이스 2칸) 재확인.</li>
+      <li>의존성 오류: <code>pom.xml</code>의 필수 의존성 선언 여부 확인.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>5. 다음 단계 준비</h2>
+    <ul>
+      <li>3단계: <code>GET /hello</code> 엔드포인트 구현 예정.</li>
+      <li>패키지 구조 예시: <code>controller</code>, <code>service</code>, <code>dto</code> 등 분리.</li>
+      <li>컨트롤러 추가 후 동일한 실행 절차로 검증 예정.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>정리 일자: <!-- 필요 시 업데이트 --></p>
+  </footer>
+</body>
+</html>
